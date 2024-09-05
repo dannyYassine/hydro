@@ -1,0 +1,17 @@
+networks:
+  dev:
+    driver: bridge
+
+services:
+  client:
+    container_name: hydro-client
+    build:
+      context: .
+      dockerfile: ./docker/client/client.dockerfile
+    command: tail -f /dev/null
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./client:/usr/src/client
+    networks:
+      - dev
