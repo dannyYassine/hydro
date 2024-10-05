@@ -1,9 +1,10 @@
+import { Observable } from "../hooks/store.js";
 import { BasePresenter } from "../presenters/BasePresenter.js";
 
 export class BaseView<T> {
   vm;
 
-  constructor(vm: BasePresenter) {
+  constructor(vm: { data: Observable<T> }) {
     this.vm = vm;
   }
 
@@ -13,10 +14,6 @@ export class BaseView<T> {
 
   get data(): T {
     return this.vm.data;
-  }
-
-  get(key: string): unknown {
-    this.vm.data.get(key);
   }
 
   get methods() {

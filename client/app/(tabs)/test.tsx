@@ -10,13 +10,17 @@ import { usePresenter } from '@/core/hooks/usePresenter';
 import { useProxyData } from '@/core/hooks/store';
 
 export type TextView = {
-  count: number
+  count: number,
+  hi(): void
 }
 
 export default function HomeScreen() {
   const data = useProxyData<TextView>({ count: 0 });
   const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, {
-    data
+    data,
+    hi() {
+      console.log('hi');
+    }
   });
 
   return (

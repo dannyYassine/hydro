@@ -130,6 +130,10 @@ export class State extends Store {
     this.bind();
   }
 
+  has(key: string) {
+    return !!this.react[key];
+  }
+
   set(key: string, value: unknown) {
     super.set(key, value);
     this.react[key][1](value);
