@@ -7,11 +7,15 @@ import { ThemedView } from '@/components/ThemedView';
 import { Button } from 'react-native';
 import { TestPresenter } from '@/core/presenters/TestPresenter';
 import { usePresenter } from '@/core/hooks/usePresenter';
-import { useData, useProxyData } from '@/core/hooks/store';
+import { useProxyData } from '@/core/hooks/store';
+
+export type TextView = {
+  count: number
+}
 
 export default function HomeScreen() {
-  const data = useProxyData({ count: 0 });
-  const presenter: TestPresenter = usePresenter(TestPresenter, {
+  const data = useProxyData<TextView>({ count: 0 });
+  const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, {
     data
   });
 

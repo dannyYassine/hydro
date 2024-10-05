@@ -1,6 +1,6 @@
 import { BasePresenter } from "../presenters/BasePresenter.js";
 
-export class BaseView {
+export class BaseView<T> {
   vm;
 
   constructor(vm: BasePresenter) {
@@ -11,7 +11,7 @@ export class BaseView {
     this.vm.data.set(key, value);
   }
 
-  get data(): unknown {
+  get data(): T {
     return this.vm.data;
   }
 

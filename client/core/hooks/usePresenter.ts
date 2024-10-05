@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import { BasePresenter } from "../presenters/BasePresenter";
 
-export function usePresenter(PresenterClass: typeof BasePresenter, vm = {}): BasePresenter {
+export function usePresenter<P extends BasePresenter<V>, V>(PresenterClass: P, vm = {}): P {
   let ref = useRef(PresenterClass);
 
   if (ref.current === PresenterClass) {

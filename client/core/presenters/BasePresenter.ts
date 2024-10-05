@@ -1,7 +1,7 @@
 import { BaseView } from "../views/BaseView";
 
-export class BasePresenter {
-    view?: BaseView;
+export class BasePresenter<V> {
+    view?: BaseView<V>;
   
     constructor() {}
   
