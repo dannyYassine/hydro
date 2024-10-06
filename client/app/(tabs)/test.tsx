@@ -8,19 +8,18 @@ import { Button } from 'react-native';
 import { TestPresenter } from '@/core/presenters/TestPresenter';
 import { usePresenter } from '@/core/hooks/usePresenter';
 import { useProxyData } from '@/core/hooks/store';
+import { TextInput } from 'react-native-gesture-handler';
 
 export type TextView = {
   count: number,
-  hi(): void
+  name: string,
+  email: string
 }
 
 export default function HomeScreen() {
-  const data = useProxyData<TextView>({ count: 0 });
+  const data = useProxyData<TextView>({ count: 0, name: '', email: '' });
   const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, {
-    data,
-    hi() {
-      console.log('hi');
-    }
+    data
   });
 
   return (
@@ -39,6 +38,14 @@ export default function HomeScreen() {
       <ThemedView style={styles.stepContainer}>
         <Button title="Tap" onPress={() => presenter.onButtonPressed()} />
         <ThemedText type="title">{data.count}</ThemedText>
+        <TextInput
+          onChangeText={(s) => presenter.onNameChange(s)}
+          value={data.name}
+        />
+        <TextInput
+          onChangeText={(s) => presenter.onEmailChange(s)}
+          value={data.email}
+        />
       </ThemedView>
     </ParallaxScrollView>
   );

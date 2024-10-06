@@ -1,5 +1,4 @@
 import { Observable } from "../hooks/store.js";
-import { BasePresenter } from "../presenters/BasePresenter.js";
 
 export class BaseView<T> {
   vm;
@@ -8,7 +7,7 @@ export class BaseView<T> {
     this.vm = vm;
   }
 
-  update(key: string, value: unknown) {
+  set(key: string, value: unknown) {
     this.vm.data.set(key, value);
   }
 
