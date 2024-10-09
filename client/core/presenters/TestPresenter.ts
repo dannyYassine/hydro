@@ -1,5 +1,7 @@
 import { TextView } from "@/app/(tabs)/test";
 import { BasePresenter } from "./BasePresenter"
+import { ViewModel } from "../viewmodels/ViewModel";
+import { TestViewModel } from "../viewmodels/TestViewModel";
 
 export class TestPresenter extends BasePresenter<TextView> {
     name: string = 'hello';
@@ -29,5 +31,9 @@ export class TestPresenter extends BasePresenter<TextView> {
         const value = this.view!.count;
 
         this.view!.count = (value + 1);
+
+        if (this.view?.count > 4) {
+            this.view?.showMessage(this.name);
+        }
     }
 }

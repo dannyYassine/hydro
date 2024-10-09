@@ -8,15 +8,7 @@ export class BaseView<T> {
   }
 
   set(key: string, value: unknown) {
-    this.vm.data.set(key, value);
-  }
-
-  get data(): T {
-    return this.vm.data;
-  }
-
-  get methods() {
-    return this.vm.methods;
+    this.vm.set(key, value);
   }
 
   destroy() {

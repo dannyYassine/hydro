@@ -54,14 +54,16 @@ export function useData(data = {}): State {
 
 export type Observable<T> = T;
 
-export function useProxyData<T>(data = {}): Observable<T> {
+export const useView = useProxyData;
+
+export function useProxyData<T>(data: Required<T>): Observable<T> {
   let ref = useRef(
     new Proxy(new State(data), {
       set(target: State, p: string, newValue: unknown): boolean {
         target.set(p as string, newValue);
         return true;
       },
-      get(target, p) {
+      get<T>(target: State, p: string & keyof State) {
         if (target[p]) {
           return target[p];
         }
@@ -150,6 +152,10 @@ export class State extends Store {
     const value = this.react[key];
     if (value === undefined) {
       return undefined;
+    }
+
+    if (value[0] === undefined && typeof value[1] === 'function') {
+      return this.data[key];
     }
 
     return value[0];

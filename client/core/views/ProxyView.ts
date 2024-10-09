@@ -5,15 +5,15 @@ export class ProxyView {
     {
         return new Proxy(view, {
             set(target: BaseView<V>, p: string, newValue: unknown): boolean {
-                if (target.vm.data.has(p)) {
-                    target.vm.data.set(p as string, newValue);
+                if (target.vm.has(p)) {
+                    target.vm.set(p as string, newValue);
                 }
                 
                 return true;
               },
               get(target, p) {
-                if (target.vm.data.has(p)) {
-                    return target.vm.data.get(p);
+                if (target.vm.has(p)) {
+                    return target.vm.get(p);
                 }
     
                 if (p in target.vm) {

@@ -7,20 +7,33 @@ import { ThemedView } from '@/components/ThemedView';
 import { Button } from 'react-native';
 import { TestPresenter } from '@/core/presenters/TestPresenter';
 import { usePresenter } from '@/core/hooks/usePresenter';
-import { useProxyData } from '@/core/hooks/store';
+import { useProxyData, State, useView } from '@/core/hooks/store';
 import { TextInput } from 'react-native-gesture-handler';
+import { useState } from 'react';
+import { ViewModel } from '@/core/viewmodels/ViewModel';
+import { TestViewModel } from '@/core/viewmodels/TestViewModel';
 
 export type TextView = {
   count: number,
   name: string,
-  email: string
+  email: string,
+  showMessage: (message: string) => void
 }
 
 export default function HomeScreen() {
-  const data = useProxyData<TextView>({ count: 0, name: '', email: '' });
-  const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, {
-    data
-  });
+  const [count, setCount] = useState(0);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+
+  const data: TextView = useView<TextView>({
+      count: 0,
+      name: '',
+      email: '',
+      showMessage(message: string) {
+        this.name = message;
+      } 
+    });
+  const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, data);
 
   return (
     <ParallaxScrollView
