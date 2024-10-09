@@ -8,14 +8,14 @@ export class TestPresenter extends BasePresenter<TextView> {
     user: {name: string, email: string} = {name: 'Danny', email: ''};
 
     mounted() {
-        this.view!.set('name', this.user.name);
+        this.view.name = this.user.name;
     }
 
     onNameChange(text: string): void {
         this.user.name = text;
 
         if (this.user.name.length < 10) {
-            this.view!.set('name', this.user.name);
+            this.view.name = this.user.name;
         }
     }
 
@@ -23,17 +23,17 @@ export class TestPresenter extends BasePresenter<TextView> {
         this.user.email = text;
 
         if (this.user.email.length < 15) {
-            this.view!.set('email', this.user.email);
+            this.view.email = this.user.email;
         }
     }
 
     onButtonPressed(): void {
-        const value = this.view!.count;
+        const value = this.view.count;
 
-        this.view!.count = (value + 1);
+        this.view.count = (value + 1);
 
-        if (this.view?.count > 4) {
-            this.view?.showMessage(this.name);
+        if (this.view.count > 4) {
+            this.view.showMessage(this.name);
         }
     }
 }

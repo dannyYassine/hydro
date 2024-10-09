@@ -2,13 +2,15 @@ import { BaseView } from "../views/BaseView";
 import { ProxyView } from "../views/ProxyView";
 
 export class BasePresenter<V> {
-    view?: typeof Proxy & BaseView<V> & V;
+    view!: typeof Proxy & BaseView<V> & V;
   
-    constructor() {}
-  
-    bind(vm: object) {
-      this.view = ProxyView.fromView(new BaseView(vm));
+    constructor(vm: object) {
+        this.view = ProxyView.fromView(new BaseView(vm));
     }
+  
+    // bind(vm: object) {
+    //   this.view = ProxyView.fromView(new BaseView(vm));
+    // }
   
     created() {
     //   console.log("created", this);

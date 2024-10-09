@@ -7,7 +7,7 @@ import { ThemedView } from '@/components/ThemedView';
 import { Button } from 'react-native';
 import { TestPresenter } from '@/core/presenters/TestPresenter';
 import { usePresenter } from '@/core/hooks/usePresenter';
-import { useProxyData, State, useView } from '@/core/hooks/store';
+import { useProxyview, State, useView } from '@/core/hooks/store';
 import { TextInput } from 'react-native-gesture-handler';
 import { useState } from 'react';
 import { ViewModel } from '@/core/viewmodels/ViewModel';
@@ -21,11 +21,7 @@ export type TextView = {
 }
 
 export default function HomeScreen() {
-  const [count, setCount] = useState(0);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-
-  const data: TextView = useView<TextView>({
+  const view: TextView = useView<TextView>({
       count: 0,
       name: '',
       email: '',
@@ -33,7 +29,7 @@ export default function HomeScreen() {
         this.name = message;
       } 
     });
-  const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, data);
+  const presenter: TestPresenter = usePresenter<TestPresenter, TextView>(TestPresenter, view);
 
   return (
     <ParallaxScrollView
@@ -50,14 +46,14 @@ export default function HomeScreen() {
       </ThemedView>
       <ThemedView style={styles.stepContainer}>
         <Button title="Tap" onPress={() => presenter.onButtonPressed()} />
-        <ThemedText type="title">{data.count}</ThemedText>
+        <ThemedText type="title">{view.count}</ThemedText>
         <TextInput
           onChangeText={(s) => presenter.onNameChange(s)}
-          value={data.name}
+          value={view.name}
         />
         <TextInput
           onChangeText={(s) => presenter.onEmailChange(s)}
-          value={data.email}
+          value={view.email}
         />
       </ThemedView>
     </ParallaxScrollView>
