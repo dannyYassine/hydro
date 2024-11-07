@@ -1,7 +1,5 @@
 import { TextView } from "@/app/(tabs)/test";
 import { BasePresenter } from "./BasePresenter"
-import { ViewModel } from "../viewmodels/ViewModel";
-import { TestViewModel } from "../viewmodels/TestViewModel";
 
 export class TestPresenter extends BasePresenter<TextView> {
     name: string = 'hello';
